@@ -1,9 +1,11 @@
 ﻿private var showMenu : boolean = false;
 var menu : GameObject;
+var menuInv : GameObject;
+var menuStatus : GameObject;
 
 function Update() {
 	if(Input.GetButtonDown("Fire2")) {
-	showMenu = !showMenu;
+		showMenu = !showMenu;
 		Debug.Log("Button B!");
 	}
 	
@@ -17,6 +19,8 @@ function Update() {
 	//jos menu kiinni, nämä liikkuvat taas
 	if(showMenu == false) {
 		Time.timeScale = 1;
+		menuInv.gameObject.SetActive(false);
+		menuStatus.gameObject.SetActive(false);
 		menu.gameObject.SetActive(false);
 //		GameObject.Find("CanvasMenu").enabled = true;
 	}
