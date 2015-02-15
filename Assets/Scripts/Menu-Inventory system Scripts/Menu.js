@@ -2,6 +2,9 @@
 var menu : GameObject;
 var menuInv : GameObject;
 var menuStatus : GameObject;
+var menuMap : GameObject;
+var menuQuest : GameObject;
+var menuOptions : GameObject;
 
 function Update() {
 	if(Input.GetButtonDown("Fire2")) {
@@ -21,6 +24,9 @@ function Update() {
 		Time.timeScale = 1;
 		menuInv.gameObject.SetActive(false);
 		menuStatus.gameObject.SetActive(false);
+		menuMap.gameObject.SetActive(false);
+		menuQuest.gameObject.SetActive(false);
+		menuOptions.gameObject.SetActive(false);
 		menu.gameObject.SetActive(false);
 //		GameObject.Find("CanvasMenu").enabled = true;
 	}
