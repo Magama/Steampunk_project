@@ -8,8 +8,8 @@ private var _camera : GameObject;
 
 //Script vars
 private var _quests : Quests;
-private var _charMotor : CharacterMotor;
-private var _mouseLook : MouseLook;
+private var _charMotor : PlayerController;
+//private var _mouseLook : MouseLook;
 //End Script
 
 //Booleans
@@ -48,7 +48,7 @@ function Start () {
 	//GameObjects End
 
 	//Components
-	_charMotor = gameObject.GetComponent(CharacterMotor);
+	_charMotor = gameObject.GetComponent(PlayerController);
 	_mouseLook = gameObject.GetComponent(MouseLook);
 	//End Components
 
@@ -59,5 +59,74 @@ function Start () {
 }
 
 function Update () {
+//Objektit eivät liiku?
+	if(Input.GetButtonDown("Fire3") && !_showQuestLog){
+		_charMotor.enabled = false;
+		//_mouseLook.enabled = false;
+		_camera.SetActive(false);
+		_showQuestLog = true;
+	}
+		else if(Input.GetButtonDown("Fire3") && _showQuestLog){
+		_charMotor.enabled = true;
+		//_mouseLook.enabled = true;
+		_camera.SetActive(true);
+		_showQuestLog = false;
+	}
+	
+	if(_updateQuestDetails){
+		_questDetails = "No Quest Selected.";
+		_updateQuestDetails = false;
+	}
+}
+
+function OnGUI() {
+	//Quest Log Stuff
+	if(_showQuestLog){
+		//Draws the Background for the quest log
+		GUI.DrawTexture(_windowRect, _questBackdrop, ScaleMode.StretchToFill);
+		//Creates the box for the quests description
+		GUI.Box(new Rect(Screen.width / 2, Screen.height / 2, 400, 100), _questDetails, questLogStyle);
+		
+		//Quests In Progress Start
+		if(_questsInProgress){
+			//The for loop that creates our buttons when quest gets started
+			for(var x : int; x < InProgressQuestLog.Count; x++){
+				//Makes sure that the quest that gets added to this list is started
+				if(InProgressQuestLog[x].questStarted){
+					if(!InProgressQuestLog[x].questSelected){
+						//This is the button that gets created when we add a new quest
+						if(GUI.Button(new Rect(100,100 + (x * 35), 120, 30), InProgressQuestLog[x].questName)){
+							//If the button is clicked, makes the quest at the array [x] selected
+							InProgressQuestLog[x].questSelected = true;
+						}
+					}
+					else {
+						//If clicked on another button then make the previous button not selected and started back over
+						InProgressQuestLog[x].questSelected = false;
+					}
+					//Removes the quest from the In Progress list when it is completed
+					if(InProgressQuestLog[x].questFinished){
+						InProgressQuestLog.RemoveAt(x);
+					}
+				}
+			}
+		} //Quests In Progress End
+		
+		if(_questsInProgress){
+			if(GUI.Button(new Rect(0,0,200,35), "Completed Quest")){
+				_completedQuests = true;
+				_questsInProgress = false;
+				_updateQuestDetails = true;
+			}
+		}
+			
+		if(_completedQuests){
+			if(GUI.Button(new Rect(0,0,200,35), "Quests")){
+				_completedQuests = false;
+				_questsInProgress = true;
+				_updateQuestDetails = true;
+			}
+		}
+	}
 
 }
