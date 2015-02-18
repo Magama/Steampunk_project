@@ -6,12 +6,12 @@ var QuestList : List.<QuestManager> = new List.<QuestManager>();
 
 private var _player : GameObject;
 
-//var _questLog : QuestLog
+private var _questLog : QuestLog;
 
 function Start () {
 	AddQuests();
 	_player = GameObject.FindGameObjectWithTag("Player");
-	//_questLog = _player.GetComponent(QuestLog);
+	_questLog = _player.GetComponent(QuestLog);
 }
 
 function Update () {
