@@ -18,6 +18,7 @@
 	function QuestManager(ID : int, Stage : int, Name : String, Details : String, Started : boolean, TurnIn : boolean, Finished : boolean, Selected : boolean){
 		this.questID = ID;
 		this.questStage = Stage;
+		this.questName = Name;
 		this.questDetails = Details;
 		this.questStarted = Started;
 		this.questTurnin = TurnIn;

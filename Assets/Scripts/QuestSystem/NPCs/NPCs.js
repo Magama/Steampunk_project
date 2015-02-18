@@ -1,4 +1,5 @@
-﻿import System.Collections.Generic;
+﻿//This script is where you go to add in all the NPCs for the game.
+import System.Collections.Generic;
 
 //The list of all NPCs
 var NPCList : List.<NPCManager> = new List.<NPCManager>();
