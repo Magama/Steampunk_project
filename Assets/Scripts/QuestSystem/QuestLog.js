@@ -87,6 +87,8 @@ function OnGUI() {
 		//Creates the box for the quests description
 		GUI.Box(new Rect(Screen.width / 2, Screen.height / 2, 400, 100), _questDetails, questLogStyle);
 		
+		
+		
 		//Quests In Progress Start
 		if(_questsInProgress){
 			//The for loop that creates our buttons when quest gets started
@@ -111,6 +113,31 @@ function OnGUI() {
 				}
 			}
 		} //Quests In Progress End
+		
+		
+		
+		//Completed quests Start
+				if(_completedQuests){
+			//The for loop that creates our buttons when quest gets started
+			for(var y : int; y < CompletedQuestLog.Count; y++){
+				//Makes sure that the quest that gets added to this list is finished
+				if(CompletedQuestLog[y].questFinished){
+					if(!CompletedQuestLog[y].questSelected){
+						//This is the button that gets created when we add a new quest
+						if(GUI.Button(new Rect(100,100 + (y * 35), 120, 30), CompletedQuestLog[y].questName)){
+							//If the button is clicked, makes the quest at the array [y] selected
+							CompletedQuestLog[y].questSelected = true;
+						}
+					}
+					else {
+						//If clicked on another button then make the previous button not selected and started back over
+						CompletedQuestLog[y].questSelected = false;
+					}
+				}
+			}
+		} //Completed quests End
+		
+		
 		
 		if(_questsInProgress){
 			if(GUI.Button(new Rect(0,0,200,35), "Completed Quest")){
