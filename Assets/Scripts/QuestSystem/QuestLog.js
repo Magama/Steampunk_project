@@ -17,7 +17,7 @@ private var _showQuestLog : boolean = false;
 private var _completedQuests : boolean = false;
 private var _questsInProgress : boolean = true;
 //Sets the Quest details back to it's default
-private var _updateQuestDetails : boolean = false;
+var updateQuestDetails : boolean = false;
 //End Booleans
 
 //Window vars
@@ -71,11 +71,12 @@ function Update () {
 		//_mouseLook.enabled = true;
 		_camera.SetActive(true);
 		_showQuestLog = false;
+		updateQuestDetails = true;
 	}
 	
-	if(_updateQuestDetails){
+	if(updateQuestDetails){
 		_questDetails = "No Quest Selected.";
-		_updateQuestDetails = false;
+		updateQuestDetails = false;
 	}
 }
 
@@ -143,7 +144,7 @@ function OnGUI() {
 			if(GUI.Button(new Rect(0,0,200,35), "Completed Quest")){
 				_completedQuests = true;
 				_questsInProgress = false;
-				_updateQuestDetails = true;
+				updateQuestDetails = true;
 			}
 		}
 			
@@ -151,7 +152,7 @@ function OnGUI() {
 			if(GUI.Button(new Rect(0,0,200,35), "Quests")){
 				_completedQuests = false;
 				_questsInProgress = true;
-				_updateQuestDetails = true;
+				updateQuestDetails = true;
 			}
 		}
 	}
