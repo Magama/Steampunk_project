@@ -58,18 +58,11 @@ function Start () {
 
 }
 
-function Update () {
-//Objektit eivät liiku?
-	if(Input.GetButtonDown("Fire3") && !_showQuestLog){
-		_charMotor.enabled = false;
-		//_mouseLook.enabled = false;
-		_camera.SetActive(false);
+function QuestUpdate () {
+	if(!_showQuestLog){
 		_showQuestLog = true;
 	}
-		else if(Input.GetButtonDown("Fire3") && _showQuestLog){
-		_charMotor.enabled = true;
-		//_mouseLook.enabled = true;
-		_camera.SetActive(true);
+		else if(_showQuestLog){
 		_showQuestLog = false;
 		updateQuestDetails = true;
 	}

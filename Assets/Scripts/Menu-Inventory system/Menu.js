@@ -1,4 +1,5 @@
-﻿
+﻿import UnityEngine.UI;
+
 	private var showMenu : boolean = false;
 	var menu : GameObject;
 	var menuInv : GameObject;
@@ -6,13 +7,20 @@
 	var menuMap : GameObject;
 	var menuQuest : GameObject;
 	var menuOptions : GameObject;
-private var _player : GameObject;
+	private var _player : GameObject;
 
 	function Start() {
 	_player = GameObject.FindGameObjectWithTag("Player");
 	}
 
+
 	function Update() {
+		MenuOpenClose();
+	}	
+
+	
+	function MenuOpenClose() {
+	
 		if(Input.GetButtonDown("Fire2")) {
 			showMenu = !showMenu;
 			Debug.Log("Button B!");

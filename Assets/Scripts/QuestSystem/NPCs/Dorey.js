@@ -17,7 +17,7 @@ private var _turnedIn : boolean = false;
 
 private var _npcText : String;
 
-//collect certain ammount of coins and complete quest
+//collect certain amount of coins and complete quest
 var coins : int;
 
 var boxStyle : GUIStyle;
@@ -40,8 +40,7 @@ function Update () {
 }
 
 function PlayerTouch () {
-	if(Input.GetKeyDown(KeyCode.E) && _canTalk) {
-//		Debug.Log("Talked to "); + this.name;
+	if(Input.GetButtonDown("Fire1") && _canTalk) {
 		_talkedTo = true;
 		if(!_accepted){
 			_npcs.NPCList[0].npcStage = 0;
@@ -60,9 +59,9 @@ function CompleteQuest () {
 		//This changes our quest log's details.
 		_quests.QuestList[0].questStage = 2;
 	}
-	else (
+	else {
 		_questDone = false;
-	)
+	}
 }
 
 //This function is where we add all of our chat sequences for this NPC
@@ -89,23 +88,23 @@ function OnTriggerEnter (other : Collider) {
 	if(other.gameObject.tag == "Player"){
 		_canTalk = true;
 	}
+}
 	
 function OnTriggerExit (other : Collider) {
 	if(other.gameObject.tag == "Player"){
 		_canTalk = false;
 		_talkedTo = false;
 	}
-
 }
 
 function OnGUI () {
 	if(_canTalk){
-		GUI.Label(new Rect((Screen.width / 2) - 125, Screen. height / 2, 400, 25), "Press E to Talk to " + this.name);	
+		GUI.Label(new Rect((Screen.width / 2) - 125, Screen. height / 2, 400, 25), "Press A to Talk to " + this.name, boxStyle);	
 	}
 	if(_talkedTo){
 		GUI.Box(new Rect(Screen.width / 2, Screen.height / 2, 400, 100), _npcs.NPCList[0].npcDialogue, boxStyle);
 		if(!_accepted){ //Started of Accept Button stuff.
-			if(GUI.Button(new.Rect(Screen.width / 2, (Screen.height / 2) + 110, 80, 40), "Accept")){
+			if(GUI.Button(new Rect(Screen.width / 2, (Screen.height / 2) + 110, 80, 40), "Accept")){
 				//Change the NPCs Stage to 1 (AKA Started the quest)
 				_npcs.NPCList[0].npcStage = 1;
 				//Change the NPCs Quest Stage to 1.
@@ -119,7 +118,7 @@ function OnGUI () {
 		
 		//This will only show up after the quest is ready to be turned in.
 		if(_questDone && !_turnedIn){
-			if(GUI.Button(new.Rect(Screen.width / 2, (Screen.height / 2) + 110, 80, 40), "Turn in")){
+			if(GUI.Button(new Rect(Screen.width / 2, (Screen.height / 2) + 110, 80, 40), "Turn in")){
 				coins -= 5;
 				_npcs.NPCList[0].npcStage = 3;
 				_quests.QuestList[0].questStage = 3;
